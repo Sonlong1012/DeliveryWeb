@@ -37,9 +37,9 @@ const Cart = () => {
     try {
       const { data } = await axios.get("/api/address/get");
       if (data.success) {
-        setAddresses(data.address);
+        setAddresses(data.addresses)
         //  console.log(data, "1234455")
-        if (data.addresses.length >= 0) {
+        if (data.addresses.length > 0) {
            
           setSelectedAddress(data.addresses[0]);
         }
@@ -86,7 +86,7 @@ const Cart = () => {
 
   useEffect(() => {
     if (user) {
-      getUserAddress();
+      getUserAddress()
     }
   }, [user]);
 
@@ -209,8 +209,9 @@ const Cart = () => {
               <div className="absolute top-12 py-1 bg-white border border-gray-300 text-sm w-full">
                 {Array.isArray(addresses) && addresses.map((address, index)=> (
                   <p
+                  key={index}
                     onClick={() => {
-                      selectedAddress(address);
+                      setSelectedAddress(address);
                       setShowAddress(false);
                     }}
                     className="text-gray-500 p-2 hover:bg-gray-100"
